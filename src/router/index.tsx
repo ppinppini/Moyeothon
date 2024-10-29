@@ -3,6 +3,7 @@ import Home from '../pages/home/Home';
 import Layouts from '../layouts/Layouts';
 import Login from '../pages/login/Login';
 import Letter from '../pages/letter/Letter';
+import LetterList from '../pages/letter/LetterList';
 import MyPage from '../pages/mypage/MyPage';
 import KRedirect from '../pages/login/KRedirect';
 import GRedirect from '../pages/login/GRedirect';
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: '/letter',
         element: <Letter />,
+      },
+      {
+        path: '/letterList',
+        element: <LetterList />,
       },
       {
         path: '/mypage',
