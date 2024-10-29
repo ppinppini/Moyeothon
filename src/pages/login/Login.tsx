@@ -24,19 +24,11 @@ const Login = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#88A5D5] to-white h-screen flex flex-col justify-center items-center gap-4 ">
+     
       <div>
         <img src={logo} alt="로고이미지" />
       </div>
-      {/* <div
-        className="cursor-pointer bg-[#FEE500] font-bold rounded-3xl"
-        onClick={kakaoLogin}
-      >
-        <img
-          className="w-[300px]"
-          src={kakaoLoginBtn}
-          alt="카카오 로그인 버튼"
-        />
-      </div> */}
+
       <div
         className="cursor-pointer bg-[#FEE500] font-bold rounded-3xl"
         onClick={kakaoLogin}
