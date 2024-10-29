@@ -15,10 +15,7 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
-      {
-        path: '/login',
-        element: <Login />,
-      },
+
       {
         path: '/letter',
         element: <Letter />,
@@ -36,5 +33,9 @@ export const router = createBrowserRouter([
         element: <GRedirect />,
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ]);
