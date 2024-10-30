@@ -22,6 +22,8 @@ const KRedirect = () => {
       const data = await response.json();
       console.log(data);
       localStorage.setItem('token', data.token);
+      localStorage.setItem('uid', data.user.uid);
+      localStorage.setItem('userId', data.user.id);
       navigate('/');
     };
 
