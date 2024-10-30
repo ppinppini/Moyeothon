@@ -7,6 +7,7 @@ import LetterList from '../pages/letter/LetterList';
 import MyPage from '../pages/mypage/MyPage';
 import KRedirect from '../pages/login/KRedirect';
 import GRedirect from '../pages/login/GRedirect';
+import AddBucket from '../pages/home/AddBucket';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -15,6 +16,11 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+
+      {
+        path: '/addBucket',
+        element: <AddBucket />,
       },
 
       {
