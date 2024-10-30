@@ -33,10 +33,10 @@ export const router = createBrowserRouter([
         path: '/user/oauth2/code/kakao',
         element: <KRedirect />,
       },
-      {
-        path: '/user/oauth2/code/google',
-        element: <GRedirect />,
-      },
+      // {
+      //   path: '/user/oauth2/code/google',
+      //   element: <GRedirect />,
+      // },
     ],
   },
   {

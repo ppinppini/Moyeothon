@@ -13,9 +13,12 @@ const googleURL = `https://accounts.google.com/o/oauth2/v2/auth?
 		&scope=email profile`;
 
 const Login = () => {
+  console.log(kakaoURL);
   //카카오 로그인 함수
   const kakaoLogin = () => {
     window.location.href = kakaoURL;
+    console.log('리다이렉션 페이지로 가십시오!!');
+    // window.location.href = 'http://localhost:5173/oauth2/authorization/kakao ';
   };
   //구글 로그인 함수
   const googleLogin = () => {
@@ -24,7 +27,6 @@ const Login = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#88A5D5] to-white h-screen flex flex-col justify-center items-center gap-4 ">
-     
       <div>
         <img src={logo} alt="로고이미지" />
       </div>
