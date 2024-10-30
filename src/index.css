@@ -1,1 +1,5 @@
-@import "./css/tailwind.css";
+@import './css/tailwind.css';
+body {
+  @apply bg-light;
+  /*전체 배경색 적용*/
+}
