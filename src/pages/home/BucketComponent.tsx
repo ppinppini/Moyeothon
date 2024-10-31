@@ -83,20 +83,24 @@ const BucketComponent = () => {
 
   return (
     <div className="flex justify-center items-center h-full">
-      <div className="px-10">
-        <div className="flex flex-wrap gap-4 justify-center">
+      <div>
+        <div className="flex flex-wrap mobile:gap-2 tablet:gap-2 gap-4 justify-center ">
           {bucketItems.map((item, index) => (
             <div
               key={index}
-              className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between min-w-[300px] max-w-[300px] min-h-[200px] mb-4 hover:-translate-y-6 hover:transition-transform duration-300 cursor-pointer"
+              className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between mobile:w-1/2 mobile:min-w-[150px] mobile:max-w-[150px] tablet:min-w-[300px] tablet:max-w-[300px] min-w-[300px] max-w-[300px] min-h-[150px] mb-4 hover:-translate-y-6 hover:transition-transform duration-300 cursor-pointer "
               onClick={() => handleItemClick(item)}
             >
               <div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
+                <h3 className="mobile:text-sm tablet:text-lg font-semibold mb-2 ">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 tablet:text-lg mobile:text-xs">
+                  {item.description}
+                </p>
               </div>
               <i
-                className="fa-solid fa-envelope self-end mt-2 text-deep text-2xl hover:-translate-y-2"
+                className="fa-solid fa-envelope self-end mt-2 text-deep text-2xl hover:-translate-y-2 mobile:text-lg"
                 onClick={handleIconClick}
               ></i>
             </div>
@@ -113,18 +117,20 @@ const BucketComponent = () => {
             ></div>
             <div
               id="popup"
-              className="absolute w-96 h-2/5 bg-[#dddddd] rounded-3xl shadow-lg flex flex-col items-start justify-start px-12 pt-20"
+              className="absolute w-96 h-2/5 bg-[#dddddd] rounded-3xl shadow-lg flex flex-col items-start justify-start px-12 pt-20 mobile:w-80"
             >
               <button
-                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 "
                 onClick={closePopup}
               >
                 <i className="fa-solid fa-xmark"></i>
               </button>
-              <h3 className="text-lg font-semibold mb-2 mb-4 text-left">
+              <h3 className="text-lg font-semibold mb-2 mb-4 text-left mobile:text-base">
                 {popupData.title}
               </h3>
-              <p className="text-gray-600">{popupData.description}</p>
+              <p className="text-gray-600 mobile:text-sm">
+                {popupData.description}
+              </p>
             </div>
           </div>
         )}

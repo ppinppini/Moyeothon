@@ -5,7 +5,7 @@ const LetterList = () => {
       <div className="flex justify-end">
         <i className="fas fa-2xl fa-user text-deep"></i>
       </div>
-      <h1 className="text-center text-middle mobile:text-3xl">
+      <h1 className="text-center text-middle mobile:text-3xl font-kaisei">
         Check Your Letter
       </h1>
       <div className="flex justify-center gap-3   items-center max-w-24 bg-white ">
