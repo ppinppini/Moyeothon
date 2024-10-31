@@ -1,7 +1,18 @@
+import { useQuery, useMutation } from '@tanstack/react-query';
 import LetterItem from './LetterItem';
+import { getMessageList } from '../../api/api';
+import { apiClient } from '../../api/api';
 const LetterList = () => {
+  const uid = localStorage.getItem('uid');
+  const { data, isError, isPending } = useQuery({
+    queryKey: ['message'],
+    queryFn: () => getMessageList(uid),
+  });
+  console.log(data);
+
+  // user()
   return (
-    <main className="p-4 bg-gradient-to-b from-[#88A5D5] to-white h-dvh">
+    <main className="p-4  h-dvh">
       <div className="flex justify-end">
         <i className="fas fa-2xl fa-user text-deep"></i>
       </div>
@@ -14,7 +25,7 @@ const LetterList = () => {
       </div>
 
       <section className="grid mobile:grid-cols-2 tablet:grid-cols-3 gap-2 relative">
-        <LetterItem />
+        {data?.map((letter) => <LetterItem key={letter.id} letter={letter} />)}
       </section>
     </main>
   );
