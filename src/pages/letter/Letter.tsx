@@ -1,14 +1,54 @@
 import { Textarea, Button } from '@material-tailwind/react';
 import { Input } from '@material-tailwind/react';
-import { ChangeEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { ChangeEvent, useId, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { messagePost, replyMessage } from '../../api/api';
 const Letter = () => {
   const [letterTitle, setLetterTitle] = useState<string>('');
   const [letterContent, setLetterContent] = useState<string>('');
+  const uid = localStorage.getItem('uid');
+  const location = useLocation();
+  const letterInfo = location.state;
+  console.log(location.state);
 
   const navigate = useNavigate();
-  const sendLetter = () => {};
+  const sendMessageMutate = useMutation({
+    mutationFn: () =>
+      replyMessage(uid, location.state.id, {
+        receiverId: location.state.receiverId,
+        content: 'letterContent',
+      }),
+    onSuccess: () => {
+      //   alert('쪽지 보내기 성공');
+      //   navigate('/letterList');
+    },
+  });
 
+  // const message = {
+  //   id: uuid,
+  //   createTime: new Date().toISOString(),
+  //   content: letterContent,
+  //   sender: {
+  //     id: letterInfo.sender.id,
+  //     uid: letterInfo.sender.uid,
+  //     password: letterInfo.sender.password,
+  //     name: letterInfo.sender.name,
+  //     nickname: letterInfo.sender.nickname,
+  //     email: letterInfo.sender.email,
+  //     provider: letterInfo.sender.provider,
+  //   },
+  //   receiver: {
+  //     id: letterInfo.receiver.id,
+  //     uid: letterInfo.receiver.uid,
+  //     password: letterInfo.receiver.password,
+  //     name: letterInfo.receiver.name,
+  //     nickname: letterInfo.receiver.nickname,
+  //     email: letterInfo.receiver.email,
+  //     provider: letterInfo.receiver.provider,
+  //   },
+  //   status: '읽음',
+  // };
   return (
     <main className="w-full  bg-light h-dvh p-4">
       <div
@@ -22,7 +62,7 @@ const Letter = () => {
           Someone's Bucket List
         </h1>
         <h2 className="tablet:text-3xl mobile:text-xl font-semibold text-deep">
-          목적지 없이 드라이브
+          {letterInfo.content}
         </h2>
       </div>
       <div className="flex bg-white py-2 gap-2 rounded-md items-center justify-center mobile:w-1/3 tablet:w-1/6 max-w-32 mt-4">
@@ -61,7 +101,10 @@ const Letter = () => {
                 전송
               </Button>
             ) : (
-              <Button className="bg-deep text-white block" type="submit">
+              <Button
+                className="bg-deep text-white block"
+                onClick={() => sendMessageMutate.mutate()}
+              >
                 전송
               </Button>
             )}
