@@ -7,6 +7,11 @@ import MyBucket from './MyBucket';
 const MyPage = () => {
   const navigate = useNavigate();
 
+  const handleLogout = async () => {
+    localStorage.clear();
+    navigate('/login');
+  };
+
   return (
     <>
       <main className="w-full bg-light h-full p-4 flex items-center justify-center relative pt-28">
@@ -28,6 +33,7 @@ const MyPage = () => {
         <Button
           className="bg-white text-black rounded-full transition-colors duration-300 hover:bg-deep hover:text-white"
           type="button"
+          onClick={handleLogout}
         >
           로그아웃
         </Button>
