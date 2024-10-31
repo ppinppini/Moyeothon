@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Textarea, Button, Input } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
+import { apiClient } from '../../api/api';
 
 const AddBucket = () => {
   const [isPublic, setIsPublic] = useState(true);
-  const [bucketTitle, setBucketTitle] = useState('비 오는 날 포장마차 가기☔️');
-  const [bucketContent, setBucketContent] = useState(
-    '비 오는 날 낭만 가득하게 포장마차에서 소주 드실 분 쪽지 주세요',
-  );
+  const [bucketTitle, setBucketTitle] = useState('');
+  const [bucketContent, setBucketContent] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const popup = document.getElementById('popup');
@@ -24,12 +23,28 @@ const AddBucket = () => {
         setShowPopup(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const handleSave = async () => {
+    const uid = localStorage.getItem('uid');
+    if (uid) {
+      try {
+        const response = await apiClient.post(`/api/bucket/create/${uid}`, {
+          title: bucketTitle,
+          content: bucketContent,
+          public: isPublic,
+        });
+        console.log('버킷리스트 생성 성공:', response.data);
+        navigate('/');
+      } catch (error) {
+        console.error('버킷리스트 생성 실패:', error);
+      }
+    }
+  };
 
   return (
     <main className="w-full bg-light h-dvh p-4 flex items-center justify-center relative">
@@ -38,8 +53,10 @@ const AddBucket = () => {
           <Input
             label="나의 버킷리스트"
             required
-            defaultValue={bucketTitle}
-            onChange={(e) => setBucketTitle(e.target.value)}
+            value={bucketTitle}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setBucketTitle(e.target.value)
+            }
             className="w-full bg-white"
           />
         </div>
@@ -48,8 +65,10 @@ const AddBucket = () => {
             label="내용"
             rows={16}
             required
-            defaultValue={bucketContent}
-            onChange={(e) => setBucketContent(e.target.value)}
+            value={bucketContent}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              setBucketContent(e.target.value)
+            }
             className="w-full bg-white"
           />
           <div className="absolute bottom-4 right-3 flex items-center gap-2">
@@ -64,11 +83,9 @@ const AddBucket = () => {
                 className="sr-only peer"
               />
               <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:bg-deep">
-                {isPublic ? (
-                  <div className="absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform peer-checked:left-11 peer-checked:border-white translate-x-5 duration-300" />
-                ) : (
-                  <div className="absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform peer-checked:left-11 peer-checked:border-white " />
-                )}
+                <div
+                  className={`absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform ${isPublic ? 'peer-checked:left-11 peer-checked:border-white translate-x-5' : ''}`}
+                />
               </div>
             </label>
           </div>
@@ -89,7 +106,7 @@ const AddBucket = () => {
                   : 'bg-white text-black block rounded-full'
               }
               type="button"
-              onClick={() => navigate('/')}
+              onClick={handleSave}
             >
               저장
             </Button>

@@ -13,7 +13,7 @@ const googleURL = `https://accounts.google.com/o/oauth2/v2/auth?
 		&scope=email profile`;
 
 const Login = () => {
-  console.log(kakaoURL);
+  // console.log(kakaoURL);
   //카카오 로그인 함수
   const kakaoLogin = () => {
     window.location.href = kakaoURL;
