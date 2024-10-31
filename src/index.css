@@ -1,5 +1,5 @@
 @import './css/tailwind.css';
 body {
-  @apply bg-light;
+  @apply bg-gradient-to-b from-[#88A5D5] to-white
   /*전체 배경색 적용*/
 }
