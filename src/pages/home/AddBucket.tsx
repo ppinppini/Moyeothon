@@ -10,7 +10,7 @@ const AddBucket = () => {
   );
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const popup = document.getElementById('popup');
@@ -64,7 +64,11 @@ const AddBucket = () => {
                 className="sr-only peer"
               />
               <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:bg-deep">
-                <div className="absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform peer-checked:left-11 peer-checked:border-white" />
+                {isPublic ? (
+                  <div className="absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform peer-checked:left-11 peer-checked:border-white translate-x-5 duration-300" />
+                ) : (
+                  <div className="absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform peer-checked:left-11 peer-checked:border-white " />
+                )}
               </div>
             </label>
           </div>
