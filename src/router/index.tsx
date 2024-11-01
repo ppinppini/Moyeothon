@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Home from '../pages/home/Home';
 import Layouts from '../layouts/Layouts';
 import Login from '../pages/login/Login';
@@ -12,6 +12,10 @@ import AddBucket from '../pages/home/AddBucket';
 import EditBucket from '../pages/home/EditBucket';
 
 export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/login" replace />, // Redirect root path to /login
+  },
   {
     path: '/',
     element: <Layouts />,
