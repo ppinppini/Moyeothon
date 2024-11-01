@@ -28,11 +28,14 @@ const MyBucket = () => {
 
   const handleDelete = async (id: number) => {
     const uid = localStorage.getItem('uid');
+    // console.log('삭제할 uid:', uid);
+    // console.log('삭제할 bucketId:', id);
+
     try {
       await apiClient.delete(`/api/bucket/${uid}/${id}`);
-      setBucketItems((prevItems) => prevItems.filter((item) => item.id !== id)); // 삭제한 아이템을 제외한 새로운 배열 생성
+      setBucketItems((prevItems) => prevItems.filter((item) => item.id !== id)); //삭제된 버킷리스트를 제외하고 배열 업데이트
     } catch (error) {
-      console.error('버켓 리스트 삭제 실패:', error);
+      console.error('버킷 리스트 삭제 실패:', error);
     }
   };
 
@@ -56,7 +59,7 @@ const MyBucket = () => {
               <div className="flex justify-end gap-2">
                 <button
                   className="bg-deep text-white text-xs rounded-full px-2 py-1 hover:-translate-y-2 transition-transform duration-300"
-                  onClick={() => handleIconClick(item.id)} // 수정 버튼 클릭 시 수정 화면으로 이동
+                  onClick={() => handleIconClick(item.id)} // 수정 버튼 클릭 시 수정 화면으로 이동(editBucket)
                 >
                   수정
                 </button>
