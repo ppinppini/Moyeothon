@@ -14,7 +14,7 @@ const MyPage = () => {
 
   return (
     <>
-      <main className="w-full bg-light h-full p-4 flex items-center justify-center relative pt-28">
+      <main className="w-full bg-light h-full p-4 flex items-center justify-center relative">
         <div className="w-full flex flex-col gap-4">
           <Nav />
           <Info />
