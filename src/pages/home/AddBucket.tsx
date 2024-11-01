@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Textarea, Button, Input } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
 import { createBucket } from '../../api/api';
+import axios from 'axios';
 
 const AddBucket = () => {
   const [isPublic, setIsPublic] = useState(true);
   const [bucketTitle, setBucketTitle] = useState('');
   const [bucketContent, setBucketContent] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [popupContent, setPopupContent] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +31,15 @@ const AddBucket = () => {
     };
   }, []);
 
+  const fetchPopupContent = async () => {
+    try {
+      const response = await axios.get(import.meta.env.VITE_API_AI_URL);
+      setPopupContent(response.data.content); //content 변수 명 변경
+    } catch (error) {
+      console.error('ai 통신 실패:', error);
+    }
+  };
+
   const handleSave = async () => {
     const uid = localStorage.getItem('uid');
     if (uid) {
@@ -38,6 +49,13 @@ const AddBucket = () => {
       } catch (error) {
         console.error('버킷리스트 생성 실패:', error);
       }
+    }
+  };
+
+  const handlePopupToggle = async () => {
+    setShowPopup(!showPopup);
+    if (!showPopup) {
+      await fetchPopupContent();
     }
   };
 
@@ -79,7 +97,11 @@ const AddBucket = () => {
               />
               <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:bg-deep">
                 <div
-                  className={`absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform ${isPublic ? 'peer-checked:left-11 peer-checked:border-white translate-x-5' : ''}`}
+                  className={`absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform ${
+                    isPublic
+                      ? 'peer-checked:left-11 peer-checked:border-white translate-x-5'
+                      : ''
+                  }`}
                 />
               </div>
             </label>
@@ -89,7 +111,7 @@ const AddBucket = () => {
           <button
             id="circle-button"
             className="w-12 h-12 rounded-full bg-deep flex items-center justify-center text-white shadow-lg hover:-translate-y-2 hover:transition-transform duration-300"
-            onClick={() => setShowPopup(!showPopup)}
+            onClick={handlePopupToggle}
           >
             AI
           </button>
@@ -113,7 +135,7 @@ const AddBucket = () => {
           id="popup"
           className="absolute left-7 bottom-60 w-100 h-1/5 bg-[#EEEEEE] rounded-lg shadow-lg flex items-center justify-center p-4"
         >
-          <p>‘새벽에 러닝하기’ 버킷리스트는 어떤가요?</p>
+          <p>{popupContent}</p>
         </div>
       )}
     </main>
