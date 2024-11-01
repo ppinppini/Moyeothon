@@ -25,7 +25,7 @@ const MyPage = () => {
       <div className="fixed bottom-0 left-0 right-0 flex justify-between items-center p-4 bg-inherit z-50 shadow-lg">
         <Button
           onClick={() => navigate('/letterlist')}
-          className="bg-white text-black rounded-full transition-colors duration-300 hover:-translate-y-6 transition-transform duration-300 px-4"
+          className="bg-white text-black rounded-full transition-colors duration-300 hover:-translate-y-6 px-4"
         >
           <i className="fa-solid fa-inbox text-2xl text-deep"></i>
         </Button>

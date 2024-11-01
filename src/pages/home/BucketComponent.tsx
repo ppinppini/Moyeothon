@@ -99,7 +99,7 @@ const BucketComponent = () => {
             >
               <i className="fa-solid fa-xmark"></i>
             </button>
-            <h3 className="text-lg font-semibold mb-2 mb-4 text-left mobile:text-base">
+            <h3 className="text-lg font-semibold mb-4 text-left mobile:text-base">
               {popupData.title}
             </h3>
             <p className="text-gray-600 mobile:text-sm">{popupData.content}</p>
