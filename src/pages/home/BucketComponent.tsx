@@ -33,8 +33,8 @@ const BucketComponent = () => {
     fetchBucketItems();
   }, []);
 
-  const handleIconClick = (user: BucketItem['user']) => {
-    navigate('/letter', { state: { user } }); //user 정보를 담아 보냄
+  const handleIconClick = (item: BucketItem) => {
+    navigate('/letter', { state: { item, from: '' } }); // 연결 링크 수정 필요
   };
 
   const handleItemClick = (item: BucketItem) => {
@@ -76,7 +76,7 @@ const BucketComponent = () => {
                 className="fa-solid fa-envelope self-end mt-2 text-deep text-2xl hover:-translate-y-2 mobile:text-lg"
                 onClick={(e) => {
                   e.stopPropagation(); //이벤트 버블링 방지 (부모 요소 이벤트 실행 방지)
-                  handleIconClick(item.user);
+                  handleIconClick(item);
                 }}
               ></i>
             </div>
