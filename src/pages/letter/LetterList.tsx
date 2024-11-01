@@ -47,14 +47,14 @@ const LetterList = () => {
         <Button
           className="bg-white text-gray-800 rounded-full shadow-lg w-12 h-12 flex items-center justify-center  z-50"
           type="button"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/home')}
         >
           <i className="fas fa-2xl fa-right-from-bracket text-deep cursor-pointer"></i>
         </Button>
         <Button
           className="bg-white text-gray-800 rounded-full shadow-lg w-12 h-12 flex items-center justify-center  z-50"
           type="button"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/home')}
         >
           <i className="fas fa-2xl fa-user text-deep"></i>
         </Button>

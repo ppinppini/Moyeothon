@@ -23,7 +23,7 @@ const KRedirect = () => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('uid', data.user.uid);
       // localStorage.setItem('userId', data.user.id);
-      navigate('/');
+      navigate('/home');
     };
 
     if (code) {

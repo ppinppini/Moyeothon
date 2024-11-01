@@ -25,7 +25,7 @@ const Letter = () => {
     onSuccess: () => {
       queryClient.invalidateQueries();
       alert('성공');
-      navigate('/');
+      navigate('/home');
     },
   });
   // 나한테 온 쪽지 답장하는 함수

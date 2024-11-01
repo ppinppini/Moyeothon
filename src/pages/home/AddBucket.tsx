@@ -46,7 +46,7 @@ const AddBucket = () => {
           isPublic: isPublic,
         });
         // console.log('버킷리스트 생성 성공:', response.data);
-        navigate('/');
+        navigate('/home');
       } catch (error) {
         console.error('버킷리스트 생성 실패:', error);
       }

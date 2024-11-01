@@ -49,7 +49,7 @@ const Info = () => {
     if (uid) {
       try {
         await apiClient.delete(`/user/${uid}`);
-        navigate('/login');
+        navigate('/');
       } catch (error) {
         console.error('탈퇴 실패:', error);
       }

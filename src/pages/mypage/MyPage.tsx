@@ -9,7 +9,7 @@ const MyPage = () => {
 
   const handleLogout = async () => {
     localStorage.clear();
-    navigate('/login');
+    navigate('/');
   };
 
   return (
