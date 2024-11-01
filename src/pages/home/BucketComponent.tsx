@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiClient } from '../../api/api';
 import { BucketItem } from '../../types/types';
 import SearchComponent from './Search';
+import { fetchBucketItems } from '../../api/api';
 
 const BucketComponent = () => {
   const navigate = useNavigate();
@@ -17,12 +17,12 @@ const BucketComponent = () => {
   };
 
   useEffect(() => {
-    const fetchBucketItems = async () => {
+    const fetchItems = async () => {
       const uid = localStorage.getItem('uid');
       if (uid) {
         try {
-          const response = await apiClient.get(`/api/bucket/all/${uid}`);
-          const filteredItems = filterPublicItems(response.data); //필터링 함수
+          const items = await fetchBucketItems(uid);
+          const filteredItems = filterPublicItems(items);
           setBucketItems(filteredItems);
           setOriginalItems(filteredItems);
         } catch (error) {
@@ -30,7 +30,7 @@ const BucketComponent = () => {
         }
       }
     };
-    fetchBucketItems();
+    fetchItems();
   }, []);
 
   const handleIconClick = (item: BucketItem) => {

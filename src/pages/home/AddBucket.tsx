@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Textarea, Button, Input } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
-import { apiClient } from '../../api/api';
+import { createBucket } from '../../api/api';
 
 const AddBucket = () => {
   const [isPublic, setIsPublic] = useState(true);
@@ -32,20 +32,8 @@ const AddBucket = () => {
   const handleSave = async () => {
     const uid = localStorage.getItem('uid');
     if (uid) {
-      // const bucketData = {
-      //   title: bucketTitle,
-      //   content: bucketContent,
-      //   isPublic: isPublic,
-      // };
-      // console.log('버킷리스트 데이터:', bucketData);
       try {
-        // const response =
-        await apiClient.post(`/api/bucket/create/${uid}`, {
-          title: bucketTitle,
-          content: bucketContent,
-          isPublic: isPublic,
-        });
-        // console.log('버킷리스트 생성 성공:', response.data);
+        await createBucket(uid, bucketTitle, bucketContent, isPublic);
         navigate('/home');
       } catch (error) {
         console.error('버킷리스트 생성 실패:', error);
