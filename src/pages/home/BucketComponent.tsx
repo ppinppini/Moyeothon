@@ -29,8 +29,8 @@ const BucketComponent = () => {
     fetchBucketItems();
   }, []);
 
-  const handleIconClick = () => {
-    navigate('/letter'); // 연결 링크 수정 필요
+  const handleIconClick = (item: BucketItem) => {
+    navigate('/letter', { state: { item, from: '' } }); // 연결 링크 수정 필요
   };
 
   const handleItemClick = (item: BucketItem) => {
@@ -63,7 +63,7 @@ const BucketComponent = () => {
               </div>
               <i
                 className="fa-solid fa-envelope self-end mt-2 text-deep text-2xl hover:-translate-y-2 mobile:text-lg"
-                onClick={handleIconClick}
+                onClick={() => handleIconClick(item)}
               ></i>
             </div>
           ))}

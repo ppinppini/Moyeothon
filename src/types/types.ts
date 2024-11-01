@@ -3,28 +3,37 @@ export interface User {
   name: string;
   password: string;
 }
-
-// 유저간 송수신 인터페이스 정의
-export interface IUser {
+interface IUser {
   id: number;
-  uid: string;
-  password: string;
+  email: string;
   name: string;
   nickname: string;
-  email: string;
+  password: string;
   provider: string;
+  uid: string;
+}
+interface IBucketList {
+  id: number;
+  title: string;
+  content: string;
+  public: boolean;
+  user: User;
 }
 
 export interface IMessage {
   id: number;
   content: string;
-  createTime: string;
-  senderId: number;
-  receiverId: number;
-  sender: User;
-  receiver: User;
+  createTime: string; 
   status: string;
+  bucketList: IBucketList;
+  userId: number;
+  bucketListId: number;
+  receiverId: number;
+  senderId: number;
+  receiver: IUser;
+  sender: IUser;
 }
+
 export interface BucketItem {
   id: number;
   title: string;

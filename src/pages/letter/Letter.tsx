@@ -1,54 +1,48 @@
 import { Textarea, Button } from '@material-tailwind/react';
 import { Input } from '@material-tailwind/react';
 import { useMutation } from '@tanstack/react-query';
-import { ChangeEvent, useId, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { messagePost, replyMessage } from '../../api/api';
+import { queryClient } from '../../config/ReactQueryProvider';
+
 const Letter = () => {
   const [letterTitle, setLetterTitle] = useState<string>('');
   const [letterContent, setLetterContent] = useState<string>('');
-  const uid = localStorage.getItem('uid');
   const location = useLocation();
-  const letterInfo = location.state;
-  console.log(location.state);
+  const isFromletterList = location?.state.from === 'letterlist';
+  console.log(isFromletterList);
 
+  const letterInfo = location?.state?.item;
+  const replyInfo = location?.state;
+  console.log(replyInfo);
+  console.log(letterInfo);
   const navigate = useNavigate();
+
+  // 처음 쪽지 생성하는 함수
   const sendMessageMutate = useMutation({
     mutationFn: () =>
-      replyMessage(uid, location.state.id, {
-        receiverId: location.state.receiverId,
-        content: 'letterContent',
-      }),
+      messagePost(letterInfo.id, letterInfo.userId, letterContent),
     onSuccess: () => {
-      //   alert('쪽지 보내기 성공');
-      //   navigate('/letterList');
+      queryClient.invalidateQueries();
+      alert('성공');
+      navigate('/');
     },
   });
-
-  // const message = {
-  //   id: uuid,
-  //   createTime: new Date().toISOString(),
-  //   content: letterContent,
-  //   sender: {
-  //     id: letterInfo.sender.id,
-  //     uid: letterInfo.sender.uid,
-  //     password: letterInfo.sender.password,
-  //     name: letterInfo.sender.name,
-  //     nickname: letterInfo.sender.nickname,
-  //     email: letterInfo.sender.email,
-  //     provider: letterInfo.sender.provider,
-  //   },
-  //   receiver: {
-  //     id: letterInfo.receiver.id,
-  //     uid: letterInfo.receiver.uid,
-  //     password: letterInfo.receiver.password,
-  //     name: letterInfo.receiver.name,
-  //     nickname: letterInfo.receiver.nickname,
-  //     email: letterInfo.receiver.email,
-  //     provider: letterInfo.receiver.provider,
-  //   },
-  //   status: '읽음',
-  // };
+  // 나한테 온 쪽지 답장하는 함수
+  const replyMessageMutation = useMutation({
+    mutationFn: () =>
+      replyMessage(
+        replyInfo.id,
+        letterContent,
+        replyInfo.senderId,
+        replyInfo.bucketListId,
+      ),
+    onSuccess: () => {
+      alert('성공');
+      navigate('/letterlist');
+    },
+  });
   return (
     <main className="w-full  bg-light h-dvh p-4">
       <div
@@ -62,17 +56,16 @@ const Letter = () => {
           Someone's Bucket List
         </h1>
         <h2 className="tablet:text-3xl mobile:text-xl font-semibold text-deep">
-          {letterInfo.content}
+          {letterInfo?.content}
         </h2>
       </div>
       <div className="flex bg-white py-2 gap-2 rounded-md items-center justify-center mobile:w-1/3 tablet:w-1/6 max-w-32 mt-4">
         <i className="fas fa-2xl fa-envelope text-deep"></i>
         <p>쪽지작성</p>
       </div>
-      <form
+      <div
         className="relative  mt-10 
        w-1/3 mobile:w-full  flex flex-col  items-center min-w-5 "
-        action={'백엔드 주소'}
       >
         <div className="w-full flex flex-col gap-4">
           <Input
@@ -96,21 +89,24 @@ const Letter = () => {
             }
           />
           <div className="flex justify-end">
-            {letterTitle == null && letterContent == null ? (
-              <Button className="bg-white text-black block" type="submit">
+            {!isFromletterList ? (
+              <Button
+                className="bg-white text-black block"
+                onClick={() => sendMessageMutate.mutate()}
+              >
                 전송
               </Button>
             ) : (
               <Button
                 className="bg-deep text-white block"
-                onClick={() => sendMessageMutate.mutate()}
+                onClick={() => replyMessageMutation.mutate()}
               >
-                전송
+                답장하기
               </Button>
             )}
           </div>
         </div>
-      </form>
+      </div>
     </main>
   );
 };
