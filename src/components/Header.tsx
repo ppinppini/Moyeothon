@@ -5,7 +5,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    navigate('/'); // 루트 주소로 이동
+    navigate('/home'); // 루트 주소로 이동
   };
 
   return (

@@ -24,7 +24,7 @@ const Letter = () => {
       messagePost(letterInfo.id, letterInfo.userId, letterContent),
     onSuccess: () => {
       queryClient.invalidateQueries();
-      alert('성공');
+      alert('성공적으로 쪽지를 전송했어요!');
       navigate('/home');
     },
   });
@@ -38,14 +38,14 @@ const Letter = () => {
         replyInfo.bucketListId,
       ),
     onSuccess: () => {
-      alert('성공');
+      alert('성공적으로 쪽지를 전송했어요!');
       navigate('/letterlist');
     },
   });
   return (
     <main className="w-full  bg-light h-dvh p-4">
       <div
-        className="flex justify-end cursor-pointer hover:animate-bounce"
+        className="flex justify-end cursor-pointer hover:-translate-y-2 hover:transition-transform duration-300"
         onClick={() => navigate('/mypage')}
       >
         <i className="fas fa-2xl fa-user text-deep py-4"></i>
@@ -60,7 +60,7 @@ const Letter = () => {
       </div>
       <div className="flex bg-white py-2 gap-2 rounded-md items-center justify-center mobile:w-1/3 tablet:w-1/6 max-w-32 mt-4">
         <i className="fas fa-2xl fa-envelope text-deep"></i>
-        <p>쪽지작성</p>
+        <p>쪽지 작성</p>
       </div>
       <div
         className="relative  mt-10 

@@ -100,12 +100,12 @@ const AddBucket = () => {
         <div className="flex justify-between w-full">
           <button
             id="circle-button"
-            className="w-12 h-12 rounded-full bg-deep flex items-center justify-center text-white shadow-lg hover:-translate-y-6 hover:transition-transform duration-300"
+            className="w-12 h-12 rounded-full bg-deep flex items-center justify-center text-white shadow-lg hover:-translate-y-2 hover:transition-transform duration-300"
             onClick={() => setShowPopup(!showPopup)}
           >
             AI
           </button>
-          <div className="hover:-translate-y-6 hover:transition-transform duration-300">
+          <div className="hover:-translate-y-2 hover:transition-transform duration-300">
             <Button
               className={
                 bucketTitle && bucketContent

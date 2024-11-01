@@ -27,7 +27,7 @@ interface IBucketList {
 export interface IMessage {
   id: number;
   content: string;
-  createTime: string; 
+  createTime: string;
   status: string;
   bucketList: IBucketList;
   userId: number;
