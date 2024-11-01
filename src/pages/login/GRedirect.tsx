@@ -1,44 +1,39 @@
 import { useEffect } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 const GRedirect = () => {
-    const navigate= useNavigate()
-  const code = new URL(window.location.href).searchParams.get('code');
-  console.log(code);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchToken = async () => {
+    const code = new URL(window.location.href).searchParams.get('code');
+    const fetchToken = async (code: string) => {
       if (!code) return;
-      
-      try {
-        const response = await fetch('https://accounts.google.com/o/oauth2/token', {
+
+      const response = await fetch(
+        `/api/user/oauth2/code/google?code=${code}`,
+        {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
           },
-          body: new URLSearchParams({
-            code: code,
-            client_id: import.meta.env.VITE_APP_GOOGLE_AUTH_CLIENT_ID,
-            client_secret: import.meta.env.VITE_APP_GOOGLE_CLIENT_SECRET,
-            redirect_uri: import.meta.env.VITE_APP_GOOGLE_REDIRECT_URI,
-            grant_type: 'authorization_code',
-          }),
-        });
+          body: JSON.stringify({ code }),
+        },
+      );
 
-        const data = await response.json();
-        console.log('Access Token:', data);
-        localStorage.setItem('access_token', data.access_token);
-      } catch (error) {
-        console.error('Error fetching token:', error);
-      }
+      const data = await response.json();
+
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('uid', data.user.uid);
+
+      navigate('/');
     };
-
-    fetchToken();
-    navigate('/')
-  }, [code]);
+    if (code) {
+      fetchToken(code);
+    }
+  }, []);
 
   return (
     <>
-      <h1>GRedirect Component</h1>
+      <h1>로그인 중 입니다..</h1>
     </>
   );
 };
