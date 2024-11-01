@@ -58,7 +58,7 @@ const Letter = () => {
         <i className="fas fa-2xl fa-user text-deep py-4"></i>
       </div>
       <div className="flex flex-col items-center ">
-        <h1 className="tablet:text-4xl mobile:text-2xl  font-bold text-middle ">
+        <h1 className="tablet:text-4xl mobile:text-2xl  font-bold text-middle font-kaisei">
           Someone's Bucket List
         </h1>
         <h2 className="tablet:text-3xl mobile:text-xl font-semibold text-deep">

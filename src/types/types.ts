@@ -25,7 +25,9 @@ export interface IMessage {
   receiver: User;
   status: string;
 }
-
-export interface IUsers {
-  messages: IMessage[];
+export interface BucketItem {
+  id: number;
+  title: string;
+  content: string;
+  public: boolean;
 }

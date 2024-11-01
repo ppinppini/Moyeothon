@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 const KRedirect = () => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get('code');
-  console.log('Authorization code:', code);
+  // console.log('Authorization code:', code);
 
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
-    console.log('Authorization code:', code);
+    // console.log('Authorization code:', code);
 
     const fetchToken = async (code) => {
       if (!code) return;
@@ -20,10 +20,10 @@ const KRedirect = () => {
         body: JSON.stringify({ code }),
       });
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       localStorage.setItem('token', data.token);
       localStorage.setItem('uid', data.user.uid);
-      localStorage.setItem('userId', data.user.id);
+      // localStorage.setItem('userId', data.user.id);
       navigate('/');
     };
 

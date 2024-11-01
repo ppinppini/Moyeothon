@@ -6,17 +6,17 @@ const Nav = () => {
   const isMyPageActive = location.pathname === '/mypage';
 
   return (
-    <div className="px-10">
+    <div className="px-10 font-kaisei mobile:px-6">
       <nav className="flex space-x-4 font-bold">
         <Link
           to="/"
-          className={`mobile:text-3xl ${isMainActive ? 'text-deep' : 'text-middle'}`}
+          className={`tablet:text-3xl desktop:text-3xl mobile:text-2xl ${isMainActive ? 'text-deep' : 'text-middle'}`}
         >
           <h1>Bucket List</h1>
         </Link>
         <Link
           to="/mypage"
-          className={`mobile:text-3xl ${isMyPageActive ? 'text-deep' : 'text-middle'}`}
+          className={`tablet:text-3xl desktop:text-3xl mobile:text-2xl ${isMyPageActive ? 'text-deep' : 'text-middle'}`}
         >
           <h1>My Page</h1>
         </Link>
