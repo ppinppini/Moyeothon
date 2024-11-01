@@ -2,14 +2,14 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Nav = () => {
   const location = useLocation();
-  const isMainActive = location.pathname === '/';
+  const isMainActive = location.pathname === '/home';
   const isMyPageActive = location.pathname === '/mypage';
 
   return (
     <div className="px-10 font-kaisei mobile:px-6">
       <nav className="flex space-x-4 font-bold">
         <Link
-          to="/"
+          to="/home"
           className={`tablet:text-3xl desktop:text-3xl mobile:text-2xl ${isMainActive ? 'text-deep' : 'text-middle'}`}
         >
           <h1>Bucket List</h1>
