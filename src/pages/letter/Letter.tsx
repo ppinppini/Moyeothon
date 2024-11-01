@@ -1,5 +1,5 @@
 import { Textarea, Button } from '@material-tailwind/react';
-import { Input } from '@material-tailwind/react';
+// import { Input } from '@material-tailwind/react';
 import { useMutation } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,7 +7,6 @@ import { messagePost, replyMessage } from '../../api/api';
 import { queryClient } from '../../config/ReactQueryProvider';
 
 const Letter = () => {
-  const [letterTitle, setLetterTitle] = useState<string>('');
   const [letterContent, setLetterContent] = useState<string>('');
   const location = useLocation();
   const isFromletterList = location?.state.from === 'letterlist';
@@ -26,7 +25,7 @@ const Letter = () => {
     onSuccess: () => {
       queryClient.invalidateQueries();
       alert('성공');
-      navigate('/');
+      navigate('/home');
     },
   });
   // 나한테 온 쪽지 답장하는 함수
@@ -68,7 +67,7 @@ const Letter = () => {
        w-1/3 mobile:w-full  flex flex-col  items-center min-w-5 "
       >
         <div className="w-full flex flex-col gap-4">
-          <Input
+          {/* <Input
             className="bg-white"
             required
             label="쪽지 제목"
@@ -77,7 +76,7 @@ const Letter = () => {
               setLetterTitle(e.target.value)
             }
             icon={<i className="fas fa-envelope" />}
-          />
+          /> */}
           <Textarea
             className="bg-white"
             required

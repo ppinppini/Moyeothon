@@ -1,4 +1,3 @@
-import kakaoLoginBtn from '../../assets/kakao_login_medium_narrow.png';
 import kakaoLoginBtn1 from '../../assets/kakao_login_btn.svg';
 import googleLoginBtn from '../../assets/google_login_btn.png';
 import logo from '../../assets/logo.png';

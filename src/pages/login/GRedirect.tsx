@@ -24,7 +24,7 @@ const GRedirect = () => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('uid', data.user.uid);
 
-      navigate('/');
+      navigate('/home');
     };
     if (code) {
       fetchToken(code);
