@@ -35,7 +35,7 @@ const Info = () => {
     setNickname(e.target.value);
   };
 
-  const handleBlur = async () => {
+  const handleEdit = async () => {
     try {
       await apiClient.put(`/user/${uid}`, { nickname });
       setIsEditing(false);
@@ -45,11 +45,14 @@ const Info = () => {
   };
 
   const handleDeleteAccount = async () => {
-    try {
-      await apiClient.delete(`/user/${uid}`);
-      navigate('/login');
-    } catch (error) {
-      console.error('탈퇴 실패:', error);
+    const uid = localStorage.getItem('uid');
+    if (uid) {
+      try {
+        await apiClient.delete(`/user/${uid}`);
+        navigate('/login');
+      } catch (error) {
+        console.error('탈퇴 실패:', error);
+      }
     }
   };
 
@@ -63,13 +66,13 @@ const Info = () => {
               type="text"
               value={nickname}
               onChange={handleInputChange}
-              onBlur={handleBlur}
-              className="border-b border-gray-300 focus:outline-none focus:border-blue-500"
+              onBlur={handleEdit}
+              className="border-b border-blue-300 focus:outline-none focus:border-blue-500"
               autoFocus
             />
           ) : (
             <div onClick={handleNicknameClick} className="cursor-pointer">
-              {nickname}
+              {nickname || '닉네임을 설정해 주세요!'}
             </div>
           )}
         </div>

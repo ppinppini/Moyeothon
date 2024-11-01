@@ -1,54 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { Textarea, Button, Input } from '@material-tailwind/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { apiClient } from '../../api/api';
 
-const AddBucket = () => {
+const EditBucket = () => {
   const [isPublic, setIsPublic] = useState(true);
   const [bucketTitle, setBucketTitle] = useState('');
   const [bucketContent, setBucketContent] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>(); //url에서 아이디 추출
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const popup = document.getElementById('popup');
-      const button = document.getElementById('circle-button');
-      if (
-        popup &&
-        !popup.contains(event.target as Node) &&
-        button &&
-        !button.contains(event.target as Node)
-      ) {
-        setShowPopup(false);
+    const fetchData = async () => {
+      const uid = localStorage.getItem('uid');
+      if (uid && id) {
+        try {
+          const { data } = await apiClient.get(`/api/bucket/${uid}/${id}`);
+          setBucketTitle(data.title || '');
+          setBucketContent(data.content || '');
+          setIsPublic(data.public ?? true);
+        } catch (error) {
+          console.error('버킷리스트 데이터 가져오기 실패:', error);
+        }
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+    fetchData();
+  }, [id]);
 
-  const handleSave = async () => {
+  const handleEdit = async () => {
     const uid = localStorage.getItem('uid');
-    if (uid) {
-      // const bucketData = {
-      //   title: bucketTitle,
-      //   content: bucketContent,
-      //   isPublic: isPublic,
-      // };
-      // console.log('버킷리스트 데이터:', bucketData);
+    if (uid && id) {
       try {
-        // const response =
-        await apiClient.post(`/api/bucket/create/${uid}`, {
+        await apiClient.put(`/api/bucket/${uid}/${id}`, {
           title: bucketTitle,
           content: bucketContent,
           isPublic: isPublic,
         });
-        // console.log('버킷리스트 생성 성공:', response.data);
-        navigate('/');
+        navigate('/mypage');
       } catch (error) {
-        console.error('버킷리스트 생성 실패:', error);
+        console.error('버킷리스트 수정 실패:', error);
       }
     }
   };
@@ -56,18 +47,16 @@ const AddBucket = () => {
   return (
     <main className="w-full bg-light h-dvh p-4 flex items-center justify-center relative">
       <div className="w-full flex flex-col gap-4">
-        <div className="mb-4">
-          <Input
-            label="나의 버킷리스트"
-            required
-            value={bucketTitle}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setBucketTitle(e.target.value)
-            }
-            className="w-full bg-white"
-          />
-        </div>
-        <div className="mb-4 relative">
+        <Input
+          label="나의 버킷리스트"
+          required
+          value={bucketTitle}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setBucketTitle(e.target.value)
+          }
+          className="w-full bg-white mb-4"
+        />
+        <div className="relative mb-4">
           <Textarea
             label="내용"
             rows={16}
@@ -86,12 +75,14 @@ const AddBucket = () => {
               <input
                 type="checkbox"
                 checked={isPublic}
-                onChange={() => setIsPublic(!isPublic)}
+                onChange={() => setIsPublic((prev) => !prev)} //boolean 값 반전
                 className="sr-only peer"
               />
               <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:bg-deep">
                 <div
-                  className={`absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform ${isPublic ? 'peer-checked:left-11 peer-checked:border-white translate-x-5' : ''}`}
+                  className={`absolute top-0.5 left-[2px] h-5 w-5 rounded-full bg-white border border-gray-300 transition-transform ${
+                    isPublic ? 'translate-x-5' : ''
+                  }`}
                 />
               </div>
             </label>
@@ -101,23 +92,21 @@ const AddBucket = () => {
           <button
             id="circle-button"
             className="w-12 h-12 rounded-full bg-deep flex items-center justify-center text-white shadow-lg hover:-translate-y-6 hover:transition-transform duration-300"
-            onClick={() => setShowPopup(!showPopup)}
+            onClick={() => setShowPopup((prev) => !prev)}
           >
             AI
           </button>
-          <div className="hover:-translate-y-6 hover:transition-transform duration-300">
-            <Button
-              className={
-                bucketTitle && bucketContent
-                  ? 'bg-deep text-white block rounded-full'
-                  : 'bg-white text-black block rounded-full'
-              }
-              type="button"
-              onClick={handleSave}
-            >
-              저장
-            </Button>
-          </div>
+          <Button
+            className={`${
+              bucketTitle && bucketContent
+                ? 'bg-deep text-white'
+                : 'bg-white text-black'
+            } block rounded-full hover:-translate-y-6 hover:transition-transform duration-300`}
+            type="button"
+            onClick={handleEdit}
+          >
+            저장
+          </Button>
         </div>
       </div>
       {showPopup && (
@@ -132,4 +121,4 @@ const AddBucket = () => {
   );
 };
 
-export default AddBucket;
+export default EditBucket;
