@@ -6,9 +6,9 @@ import Letter from '../pages/letter/Letter';
 import LetterList from '../pages/letter/LetterList';
 import MyPage from '../pages/mypage/MyPage';
 import KRedirect from '../pages/login/KRedirect';
-// import GRedirect from '../pages/login/GRedirect';
+import GRedirect from '../pages/login/GRedirect';
 import AddBucket from '../pages/home/AddBucket';
-import Loading from '../components/Loading';
+// import Loading from '../components/Loading';
 import EditBucket from '../pages/home/EditBucket';
 
 export const router = createBrowserRouter([
