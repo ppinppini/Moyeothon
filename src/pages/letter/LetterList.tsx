@@ -42,34 +42,33 @@ const LetterList = () => {
   };
 
   return (
-    <main className="p-4  h-dvh">
+    <main className="p-8 h-full">
       <div className="flex justify-between">
-        <Button
-          className="bg-white text-gray-800 rounded-full shadow-lg w-12 h-12 flex items-center justify-center  z-50"
-          type="button"
+        <div
+          className="   w-12 h-12 flex items-center justify-center  z-50"
           onClick={() => navigate('/home')}
         >
           <i className="fas fa-2xl fa-right-from-bracket text-deep cursor-pointer"></i>
-        </Button>
-        <Button
-          className="bg-white text-gray-800 rounded-full shadow-lg w-12 h-12 flex items-center justify-center  z-50"
-          type="button"
-          onClick={() => navigate('/home')}
+        </div>
+        <div
+          className="    w-12 h-12 flex items-center justify-center  z-50 cursor-pointer hover:-translate-y-2 hover:transition-transform duration-300"
+          onClick={() => navigate('/myPage')}
         >
           <i className="fas fa-2xl fa-user text-deep"></i>
-        </Button>
+        </div>
       </div>
-      <h1 className="text-center text-middle mobile:text-3xl">
+      <h1 className="text-center text-middle mobile:text-3xl font-kaisei">
         Check Your Letter
       </h1>
-      <div className="flex justify-center gap-3 items-center max-w-24 bg-white mb-5">
-        <i className="fas fa-2xl fa-envelope text-deep"></i>쪽지함
+      <div className="flex justify-center gap-3 py-2 rounded-md items-center max-w-24 bg-white mb-5 mobile:w-1/3 tablet:w-1/6 max-w-32 mt-4">
+        <i className="fas fa-2xl fa-envelope text-deep"></i>
+        쪽지함
       </div>
       <div className="flex gap-4 mb-5">
         <Button
           className={`${
             tab === '받은 메일'
-              ? 'border-2  bg-deep  text-white'
+              ? '  bg-deep  text-white'
               : 'bg-transparent text-deep'
           }`}
           onClick={() => handleTabChange('받은 메일')}
@@ -79,7 +78,7 @@ const LetterList = () => {
         <Button
           className={`${
             tab === '보낸 메일'
-              ? 'border-2  bg-deep  text-white'
+              ? '  bg-deep  text-white'
               : 'bg-transparent text-deep'
           }`}
           onClick={() => handleTabChange('보낸 메일')}

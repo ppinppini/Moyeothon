@@ -61,7 +61,7 @@ const BucketComponent = () => {
           {bucketItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between mobile:w-1/2 mobile:min-w-[150px] mobile:max-w-[150px] tablet:min-w-[300px] tablet:max-w-[300px] min-w-[300px] max-w-[300px] min-h-[150px] mb-4 hover:-translate-y-6 hover:transition-transform duration-300 cursor-pointer"
+              className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between mobile:w-1/2 mobile:min-w-[150px] mobile:max-w-[150px] tablet:min-w-[300px] tablet:max-w-[300px] min-w-[300px] max-w-[300px] min-h-[150px] mb-4 hover:-translate-y-2 hover:transition-transform duration-300 cursor-pointer"
               onClick={() => handleItemClick(item)}
             >
               <div>
@@ -73,7 +73,7 @@ const BucketComponent = () => {
                 </p>
               </div>
               <i
-                className="fa-solid fa-envelope self-end mt-2 text-deep text-2xl hover:-translate-y-2 mobile:text-lg"
+                className="fa-solid fa-envelope self-end mt-2 text-deep text-2xl cursor-pointer mobile:text-lg"
                 onClick={(e) => {
                   e.stopPropagation(); //이벤트 버블링 방지 (부모 요소 이벤트 실행 방지)
                   handleIconClick(item);

@@ -7,7 +7,6 @@ const EditBucket = () => {
   const [isPublic, setIsPublic] = useState(true);
   const [bucketTitle, setBucketTitle] = useState('');
   const [bucketContent, setBucketContent] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>(); //url에서 아이디 추출
 
@@ -19,7 +18,7 @@ const EditBucket = () => {
           const { data } = await apiClient.get(`/api/bucket/${uid}/${id}`);
           setBucketTitle(data.title || '');
           setBucketContent(data.content || '');
-          setIsPublic(data.public ?? true);
+          setIsPublic(data.public ?? true); //undefined 또는 null이면 true 반환
         } catch (error) {
           console.error('버킷리스트 데이터 가져오기 실패:', error);
         }
@@ -88,20 +87,13 @@ const EditBucket = () => {
             </label>
           </div>
         </div>
-        <div className="flex justify-between w-full">
-          <button
-            id="circle-button"
-            className="w-12 h-12 rounded-full bg-deep flex items-center justify-center text-white shadow-lg hover:-translate-y-6 hover:transition-transform duration-300"
-            onClick={() => setShowPopup((prev) => !prev)}
-          >
-            AI
-          </button>
+        <div className="flex justify-end w-full">
           <Button
             className={`${
               bucketTitle && bucketContent
                 ? 'bg-deep text-white'
                 : 'bg-white text-black'
-            } block rounded-full hover:-translate-y-6 hover:transition-transform duration-300`}
+            } block rounded-full hover:-translate-y-2 hover:transition-transform duration-300`}
             type="button"
             onClick={handleEdit}
           >
@@ -109,14 +101,6 @@ const EditBucket = () => {
           </Button>
         </div>
       </div>
-      {showPopup && (
-        <div
-          id="popup"
-          className="absolute left-7 bottom-60 w-100 h-1/5 bg-[#EEEEEE] rounded-lg shadow-lg flex items-center justify-center p-4"
-        >
-          <p>‘새벽에 러닝하기’ 버킷리스트는 어떤가요?</p>
-        </div>
-      )}
     </main>
   );
 };

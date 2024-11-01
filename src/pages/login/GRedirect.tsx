@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../components/Loading';
 const GRedirect = () => {
   const navigate = useNavigate();
 
@@ -33,7 +34,9 @@ const GRedirect = () => {
 
   return (
     <>
-      <h1>로그인 중 입니다..</h1>
+      <div>
+        <Loading />
+      </div>
     </>
   );
 };

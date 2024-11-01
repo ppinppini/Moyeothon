@@ -1,5 +1,5 @@
-import kakaoLoginBtn1 from '../../assets/kakao_login_btn.svg';
-import googleLoginBtn from '../../assets/google_login_btn.png';
+import kakaoLoginBtn1 from '../../assets/kakao_login_large_narrow.png';
+import googleLoginBtn from '../../assets/web_neutral_sq_ctn@4x.png';
 import logo from '../../assets/logo.png';
 const K_REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY;
 const K_REDIRECT_URI = import.meta.env.VITE_APP_REDIRECT_URI;

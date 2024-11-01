@@ -16,7 +16,7 @@ const Home = () => {
           <BucketComponent /> {/* 서치 컴포넌트 내장 */}
           <div className="fixed bottom-4 right-4">
             <Button
-              className="bg-white text-gray-800 rounded-full shadow-lg w-12 h-12 flex items-center justify-center hover:-translate-y-6 transition-transform duration-300 z-50"
+              className="bg-white text-gray-800 rounded-full shadow-lg w-12 h-12 flex items-center justify-center hover:-translate-y-2 transition-transform duration-300 z-50"
               type="button"
               onClick={() => navigate('/AddBucket')}
             >
