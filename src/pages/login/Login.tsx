@@ -1,7 +1,6 @@
 import kakaoLoginBtn1 from '../../assets/kakao_login_large_narrow.png';
 import googleLoginBtn from '../../assets/web_neutral_sq_ctn@4x.png';
 import logo from '../../assets/logo.png';
-import { Button } from '@material-tailwind/react';
 const K_REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY;
 const K_REDIRECT_URI = import.meta.env.VITE_APP_REDIRECT_URI;
 const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
