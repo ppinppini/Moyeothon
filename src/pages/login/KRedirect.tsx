@@ -31,14 +31,7 @@ const KRedirect = () => {
 
       try {
         const response = await fetch(
-          `api/user/oauth2/code/kakao?code=${code}`,
-          // {
-          //   method: 'POST',
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //   },
-          //   body: JSON.stringify({ code }),
-          // },
+          `https://moyeothon.vercel.app/user/oauth2/code/kakao/user/oauth2/code/kakao?code=${code}`,
         );
 
         if (!response.ok) {
