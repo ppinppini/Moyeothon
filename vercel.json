@@ -1,13 +1,4 @@
 {
   "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }],
-  "rewrites": [
-    {
-      "source": "/api/user/oauth2/code/kakao",
-      "destination": "https://newteamsgoody.shop/user/oauth2/code/kakao"
-    },
-    {
-      "source": "/api/user/oauth2/code/google",
-      "destination": "https://newteamsgoody.shop/user/oauth2/code/google"
-    }
-  ]
+ 
 }
