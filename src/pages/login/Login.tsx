@@ -1,17 +1,18 @@
 import kakaoLoginBtn1 from '../../assets/kakao_login_large_narrow.png';
 import googleLoginBtn from '../../assets/web_neutral_sq_ctn@4x.png';
 import logo from '../../assets/logo.png';
+import { Button } from '@material-tailwind/react';
 const K_REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY;
 const K_REDIRECT_URI = import.meta.env.VITE_APP_REDIRECT_URI;
 const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
 
 console.log(K_REST_API_KEY, K_REDIRECT_URI);
 
-const googleURL = `https://accounts.google.com/o/oauth2/v2/auth?
-		client_id=${import.meta.env.VITE_APP_GOOGLE_AUTH_CLIENT_ID}
-		&redirect_uri=${import.meta.env.VITE_APP_GOOGLE_REDIRECT_URI}
-		&response_type=code
-		&scope=email profile`;
+// const googleURL = `https://accounts.google.com/o/oauth2/v2/auth?
+// 		client_id=${import.meta.env.VITE_APP_GOOGLE_AUTH_CLIENT_ID}
+// 		&redirect_uri=${import.meta.env.VITE_APP_GOOGLE_REDIRECT_URI}
+// 		&response_type=code
+// 		&scope=email profile`;
 
 const Login = () => {
   console.log(kakaoURL);
@@ -23,7 +24,14 @@ const Login = () => {
   };
   //구글 로그인 함수
   const googleLogin = () => {
-    window.location.href = googleURL;
+    // window.location.href = googleURL;
+    return (
+      <div className="flex flex-col items-center justify-center m-w-[300px] m-h-[300px] bg-white border-2 rounded absolute top-1/2 left-1/2">
+        <h1 className="font-bold">누가 요즘 구글 씀?</h1>
+        <p>카카오로 로그인 하셈</p>
+        <Button>X</Button>
+      </div>
+    );
   };
 
   return (
