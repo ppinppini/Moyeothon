@@ -3,7 +3,6 @@
     {
       "source": "/user/oauth2/code/kakao",
       "destination": "/"
-    },
-    { "source": "/api/:path*", "destination": "/api/:path*" }
+    }
   ]
 }
