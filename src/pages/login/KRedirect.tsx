@@ -10,17 +10,18 @@ const KRedirect = () => {
     const code = new URL(window.location.href).searchParams.get('code');
     // console.log('Authorization code:', code);
 
-    const fetchToken = async (code:string) => {
+    const fetchToken = async (code: string) => {
       if (!code) return;
-      const response = await fetch(`/user/oauth2/code/kakao?code=${code}`, 
-      //   {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ code }),
-      // }
-    );
+      const response = await fetch(
+        `/user/oauth2/code/kakao?code=${code}`,
+        //   {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({ code }),
+        // }
+      );
       const data = await response.json();
       // console.log(data);
       localStorage.setItem('token', data.token);
