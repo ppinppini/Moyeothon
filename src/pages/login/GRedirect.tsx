@@ -10,14 +10,14 @@ const GRedirect = () => {
       if (!code) return;
 
       const response = await fetch(
-        `/user/oauth2/code/google?code=${code}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ code }),
-        },
+        `https://newteamsgoody.shop/user/oauth2/code/google?code=${code}`
+        // {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({ code }),
+        // },
       );
 
       const data = await response.json();
