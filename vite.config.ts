@@ -19,16 +19,17 @@ export default defineConfig({
     //   },
     // },
     proxy: {
-      '/api/user/oauth2/code/kakao': {
+      '/user/oauth2/code/kakao': {
         target: 'https://newteamsgoody.shop',
         changeOrigin: true,
         secure: true,
         rewrite: (path) =>
           path.replace(
-            /^\/api\/user\/oauth2\/code\/kakao/,
+            /^\/user\/oauth2\/code\/kakao/,
             '/user/oauth2/code/kakao',
           ),
       },
+
       '/api/user/oauth2/code/google': {
         target: 'https://newteamsgoody.shop',
         changeOrigin: true,
