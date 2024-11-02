@@ -31,7 +31,7 @@ const KRedirect = () => {
 
       try {
         const response = await fetch(
-          `/api/user/oauth2/code/kakao?code=${code}`,
+          `/user/oauth2/code/kakao?code=${code}`,
           {
             method: 'POST',
             headers: {
