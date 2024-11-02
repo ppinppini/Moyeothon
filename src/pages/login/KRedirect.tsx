@@ -30,13 +30,16 @@ const KRedirect = () => {
       if (!code) return;
 
       try {
-        const response = await fetch(`/user/oauth2/code/kakao?code=${code}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const response = await fetch(
+          `/api/user/oauth2/code/kakao?code=${code}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ code }),
           },
-          body: JSON.stringify({ code }),
-        });
+        );
 
         if (!response.ok) {
           console.error('Error:', response.status);
