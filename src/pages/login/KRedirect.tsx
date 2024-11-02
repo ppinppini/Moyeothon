@@ -12,7 +12,7 @@ const KRedirect = () => {
 
     const fetchToken = async (code:string) => {
       if (!code) return;
-      const response = await fetch(`/api/user/oauth2/code/kakao?code=${code}`, 
+      const response = await fetch(`/user/oauth2/code/kakao?code=${code}`, 
       //   {
       //   method: 'POST',
       //   headers: {
