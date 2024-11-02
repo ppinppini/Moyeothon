@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
 
-
 const KRedirect = () => {
   const navigate = useNavigate();
   // console.log('Authorization code:', code);
@@ -31,7 +30,7 @@ const KRedirect = () => {
     // };
     const fetchToken = async (code: string) => {
       if (!code) return;
-      const response = await fetch(`/api/user/oauth2/code/kakao?code=${code}`, {
+      const response = await fetch(`/user/oauth2/code/kakao?code=${code}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
