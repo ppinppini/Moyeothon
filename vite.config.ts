@@ -25,7 +25,7 @@ export default defineConfig({
         secure: true,
         rewrite: (path) =>
           path.replace(
-            /^\/api\/user\/oauth2\/code\/kakao/,
+            /^\/user\/oauth2\/code\/kakao/,
             '/user/oauth2/code/kakao',
           ),
       },
