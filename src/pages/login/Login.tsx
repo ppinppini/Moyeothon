@@ -5,6 +5,8 @@ const K_REST_API_KEY = import.meta.env.VITE_APP_REST_API_KEY;
 const K_REDIRECT_URI = import.meta.env.VITE_APP_REDIRECT_URI;
 const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
 
+console.log(K_REST_API_KEY, K_REDIRECT_URI);
+
 const googleURL = `https://accounts.google.com/o/oauth2/v2/auth?
 		client_id=${import.meta.env.VITE_APP_GOOGLE_AUTH_CLIENT_ID}
 		&redirect_uri=${import.meta.env.VITE_APP_GOOGLE_REDIRECT_URI}
