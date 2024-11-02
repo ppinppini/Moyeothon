@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
-import { apiClient } from '../../api/api';
+
 
 const KRedirect = () => {
   const navigate = useNavigate();
