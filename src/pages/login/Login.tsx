@@ -25,13 +25,7 @@ const Login = () => {
   //구글 로그인 함수
   const googleLogin = () => {
     // window.location.href = googleURL;
-    return (
-      <div className="flex flex-col items-center justify-center m-w-[300px] m-h-[300px] bg-white border-2 rounded absolute top-1/2 left-1/2">
-        <h1 className="font-bold">누가 요즘 구글 씀?</h1>
-        <p>카카오로 로그인 하셈</p>
-        <Button>X</Button>
-      </div>
-    );
+    alert('구글 로그인은 개봉박두~!');
   };
 
   return (
