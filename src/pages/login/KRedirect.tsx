@@ -15,7 +15,7 @@ const KRedirect = () => {
       try {
         if (!code) return;
         const response = await apiClient.get(
-          `/user/oauth2/code/kakao?code=${code}`
+          `/api/user/oauth2/code/kakao?code=${code}`
         );
         const data = response.data;
         localStorage.setItem('token', data.token);
