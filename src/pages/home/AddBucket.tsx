@@ -151,7 +151,7 @@ const AddBucket = () => {
       {showPopup && (
         <div
           id="popup"
-          className="absolute left-7 bottom-60 w-96 max-h-48 bg-[#EEEEEE] rounded-lg shadow-lg flex flex-col p-4"
+          className="absolute left-7 bottom-60 w-11/12 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl bg-[#EEEEEE] rounded-lg shadow-lg flex flex-col p-4"
         >
           {isLoading ? (
             <div className="flex items-center justify-center w-full h-full">
