@@ -19,7 +19,7 @@ export default defineConfig({
     //   },
     // },
     proxy: {
-      '/user/oauth2/code/kakao': {
+      '/api/user/oauth2/code/kakao': {
         target: 'https://newteamsgoody.shop',
         changeOrigin: true,
         secure: true,
