@@ -13,7 +13,7 @@ const KRedirect = () => {
     const fetchToken = async (code: string) => {
       if (!code) return;
       const response = await fetch(
-        `https://newteamsgoody.shop/user/oauth2/code/kakao?code=${code}`,
+        `https://newteamsgoody.shop/user/oauth2/code/kakao?code=${code}`
 
         // {
         //   method: 'POST',
