@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/user/oauth2/code/kakao",
+      "destination": "https://newteamsgoody.shop/user/oauth2/code/kakao"
+    }
+  ]
+}
