@@ -25,11 +25,10 @@ export default defineConfig({
         secure: true,
         rewrite: (path) =>
           path.replace(
-            /^\/user\/oauth2\/code\/kakao/,
+            /^\/api\/user\/oauth2\/code\/kakao/,
             '/user/oauth2/code/kakao',
           ),
       },
-
       '/api/user/oauth2/code/google': {
         target: 'https://newteamsgoody.shop',
         changeOrigin: true,
