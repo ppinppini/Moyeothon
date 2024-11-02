@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BucketItem } from '../types/types';
 
 const url = import.meta.env.VITE_APP_SERVER_API_URL;
 
@@ -94,7 +95,7 @@ export const replyMessage = async (
 export const getSendMessage = async () => {
   const uid = localStorage.getItem('uid');
   const response = await apiClient.get(`/message/user/sendmessage/${uid}`);
-  console.log(response.data)
+  console.log(response.data);
   return response.data;
 };
 
@@ -102,6 +103,37 @@ export const getSendMessage = async () => {
 export const getReceiveMessage = async () => {
   const uid = localStorage.getItem('uid');
   const response = await apiClient.get(`/message/user/receivemessage/${uid}`);
-  console.log(response.data)
+  console.log(response.data);
   return response.data;
+};
+
+//버킷리스트 생성
+export const createBucket = async (
+  uid: string,
+  title: string,
+  content: string,
+  isPublic: boolean,
+) => {
+  try {
+    const response = await apiClient.post(`/api/bucket/create/${uid}`, {
+      title,
+      content,
+      isPublic,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('버킷리스트 생성 실패:', error);
+    throw error;
+  }
+};
+
+// 버킷리스트를 불러오는 함수
+export const fetchBucketItems = async (uid: string): Promise<BucketItem[]> => {
+  try {
+    const response = await apiClient.get(`/api/bucket/all/${uid}`);
+    return response.data;
+  } catch (error) {
+    console.error('버킷 리스트 불러오기 실패:', error);
+    throw error;
+  }
 };
