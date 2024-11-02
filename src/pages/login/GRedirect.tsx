@@ -10,7 +10,7 @@ const GRedirect = () => {
       if (!code) return;
 
       const response = await fetch(
-        `/api/user/oauth2/code/google?code=${code}`,
+        `/user/oauth2/code/google?code=${code}`,
         {
           method: 'POST',
           headers: {
