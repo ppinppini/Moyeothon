@@ -10,6 +10,7 @@ const AddBucket = () => {
   const [bucketContent, setBucketContent] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [popupContent, setPopupContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,11 +33,15 @@ const AddBucket = () => {
   }, []);
 
   const fetchPopupContent = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(import.meta.env.VITE_API_AI_URL);
-      setPopupContent(response.data.content); //content 변수 명 변경
+      setPopupContent(response.data.parts[0].text);
+      console.log(response.data.parts[0].text);
     } catch (error) {
-      console.error('ai 통신 실패:', error);
+      console.error('AI 통신 실패:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -59,8 +64,21 @@ const AddBucket = () => {
     }
   };
 
+  //줄바꿈 변환해주는 함수 추가
+  const renderPopupContent = () => {
+    // 줄바꿈 문자를 <br />로 변환
+    const formattedContent = popupContent.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br /> {/* 각 문장 뒤에 <br /> 추가 */}
+      </React.Fragment>
+    ));
+
+    return <>{formattedContent}</>;
+  };
+
   return (
-    <main className="w-full bg-light h-dvh p-4 flex items-center justify-center relative">
+    <main className="w-full h-screen overflow-hidden bg-light p-4 flex items-center justify-center relative">
       <div className="w-full flex flex-col gap-4">
         <div className="mb-4">
           <Input
@@ -133,9 +151,17 @@ const AddBucket = () => {
       {showPopup && (
         <div
           id="popup"
-          className="absolute left-7 bottom-60 w-100 h-1/5 bg-[#EEEEEE] rounded-lg shadow-lg flex items-center justify-center p-4"
+          className="absolute left-7 bottom-60 w-96 max-h-48 bg-[#EEEEEE] rounded-lg shadow-lg flex flex-col p-4"
         >
-          <p>{popupContent}</p>
+          {isLoading ? (
+            <div className="flex items-center justify-center w-full h-full">
+              <div className="h-10 w-10 animate-spin rounded-full border-4 border-deep border-t-transparent"></div>
+            </div>
+          ) : (
+            <div className="overflow-y-auto max-h-40">
+              {renderPopupContent()}
+            </div>
+          )}
         </div>
       )}
     </main>
