@@ -1,5 +1,8 @@
 {
-    "rewrites": [
-      { "source": "/user/oauth2/code/kakao", "destination": "/" }
-    ]
-  }
+  "rewrites": [
+    {
+      "source": "/api/user/oauth2/code/kakao",
+      "destination": "/api/user/oauth2/code/kakao"
+    }
+  ]
+}
