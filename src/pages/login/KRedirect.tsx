@@ -4,7 +4,6 @@ import Loading from '../../components/Loading';
 
 const KRedirect = () => {
   const navigate = useNavigate();
-  const code = new URL(window.location.href).searchParams.get('code');
   // console.log('Authorization code:', code);
 
   useEffect(() => {
